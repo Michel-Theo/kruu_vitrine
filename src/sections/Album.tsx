@@ -7,12 +7,14 @@ import { Scribble } from '../components/Scribble'
 import { SectionHead } from '../components/SectionHead'
 import { Splatter } from '../components/Splatter'
 import { ARROW_CURVE } from '../lib/scribbles'
-import { clockDigits, isReleased, pad } from '../lib/time'
+import type { ReleaseState } from '../hooks/useRelease'
+import { duration } from '../lib/album'
+import { clockDigits, pad } from '../lib/time'
 import './Album.css'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-// Avant la sortie, aucun titre n'est envoyé au navigateur : seulement des barres floues.
+// Avant la sortie, aucun titre n'est affiché : seulement des barres floues.
 function HiddenRow({ n, width }: { n: number; width: number }) {
   const [peek, setPeek] = useState(0)
   return (
@@ -43,10 +45,9 @@ function HiddenRow({ n, width }: { n: number; width: number }) {
   )
 }
 
-export function Album({ now }: { now: Date }) {
-  const released = isReleased(now)
-  const widths = useMemo(() => Array.from({ length: RELEASE.trackCount }, (_, i) => 110 + ((i * 73) % 130)), [])
-  const tracks = released && RELEASE.tracks ? RELEASE.tracks : null
+export function Album({ now, release }: { now: Date; release: ReleaseState }) {
+  const { released, tracks, trackCount } = release
+  const widths = useMemo(() => Array.from({ length: trackCount }, (_, i) => 110 + ((i * 73) % 130)), [trackCount])
 
   return (
     <section className="album" id="album" aria-label={`the album ${RELEASE.title}`}>
@@ -62,15 +63,25 @@ export function Album({ now }: { now: Date }) {
         {tracks
           ? tracks.map((t, i) => (
               <motion.li
-                key={t}
-                className="track track--revealed"
+                key={t.n}
+                className="track"
                 initial={{ opacity: 0, filter: 'blur(6px)' }}
                 whileInView={{ opacity: 1, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
               >
-                <span className="mono ash track__n">{pad(i + 1)}</span>
-                <span>{t}</span>
+                {t.url ? (
+                  <a className="track__btn track--revealed" href={t.url} target="_blank" rel="noopener noreferrer">
+                    <span className="mono ash track__n">{pad(t.n)}</span>
+                    <span className="track__name">{t.name}</span>
+                    <span className="mono ash track__time">{duration(t.ms)}</span>
+                  </a>
+                ) : (
+                  <span className="track__btn track--revealed">
+                    <span className="mono ash track__n">{pad(t.n)}</span>
+                    <span className="track__name">{t.name}</span>
+                  </span>
+                )}
               </motion.li>
             ))
           : widths.map((w, i) => <HiddenRow key={i} n={i + 1} width={w} />)}

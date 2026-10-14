@@ -27,7 +27,7 @@ npm run lint
 
 Tout ce qui change (dates, liens, contenus) se trouve dans [`src/config.ts`](src/config.ts).
 
-Paramètres utiles en dev : `?skip` saute l'écran de chargement, `?egg` affiche l'easter egg de 11:34.
+Paramètres utiles en dev : `?skip` saute l'écran de chargement, `?egg` affiche l'easter egg de 11:34, `?released` affiche le site comme après la sortie.
 
 ## Déploiement (Cloudflare Pages, gratuit)
 
@@ -53,3 +53,11 @@ Une fois acheté : **projet Pages → Custom domains → Set up a domain**, puis
 ## Avant la mise en ligne
 
 Remplacer les placeholders ⚠️ de `src/config.ts` : heure et fuseau de sortie, message de l'easter egg, mentions légales, lien Discord permanent, et les photos de `public/img/roll-*.webp`.
+
+## Bascule automatique à la sortie
+
+Le site passe tout seul en mode « sorti » (pre-save → listen, compte à rebours → out now, tracklist révélée) dès que :
+- la date `RELEASE.date` de `src/config.ts` est passée, **ou**
+- Apple Music rend l'album écoutable.
+
+La tracklist (titres, durées, liens) est lue en direct depuis l'API publique d'Apple (iTunes Lookup, sans clé) grâce à `RELEASE.appleAlbumId`. Rien à redéployer le jour J. Si l'API ne répond pas, le site utilise `RELEASE.tracks` en secours.

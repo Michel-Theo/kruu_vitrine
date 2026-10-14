@@ -3,7 +3,8 @@
 
 export const RELEASE = {
   title: '11:34',
-  // ⚠️ fuseau à confirmer (ici minuit, heure de New York)
+  // ⚠️ fuseau à confirmer (ici minuit, heure de New York ; Apple indique minuit heure du Pacifique).
+  // Le site bascule aussi tout seul dès qu'Apple rend l'album écoutable (voir appleAlbumId).
   date: '2026-11-06T00:00:00-05:00',
   dateLabel: 'nov 6, 2026',
   shortDate: '11/6',
@@ -11,9 +12,11 @@ export const RELEASE = {
   // utilisé après la sortie, à la place du pré-save
   listenUrl: 'https://www.fvr.fan/kruu/1134',
   cover: '/img/cover-1134.webp',
-  // ⚠️ tracklist à fournir. Tant qu'elle vaut null, on affiche `trackCount` lignes floutées.
+  // Album sur Apple Music : la tracklist et l'état « écoutable » sont récupérés automatiquement
+  appleAlbumId: '6817764595',
+  // secours si l'API d'Apple ne répond pas : titres affichés après la sortie
   tracks: null as string[] | null,
-  trackCount: 11,
+  trackCount: 12,
 }
 
 export const SINGLE = {
