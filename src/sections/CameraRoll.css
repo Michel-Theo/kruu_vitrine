@@ -69,10 +69,11 @@
 
 .roll-mobile__heart {
   position: absolute;
-  width: 46px;
-  right: 6%;
-  top: 30%;
+  width: 40px;
+  right: -2%;
+  top: -14px;
   transform: rotate(14deg);
+  pointer-events: none;
 }
 
 /* desktop : bande horizontale épinglée */
