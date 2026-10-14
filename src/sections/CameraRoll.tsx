@@ -37,6 +37,7 @@ function Photo({ i, distance, className }: { i: number; distance: MotionValue<nu
   return (
     <motion.figure
       className={`roll-photo ${className ?? ''}`}
+      style={{ aspectRatio: photo.ratio }}
       initial={{ y: -180, rotate: base * 5, scale: 1.1, opacity: 0 }}
       whileInView={{ y: 0, rotate: 0, scale: 1, opacity: 1 }}
       whileTap={{ scale: 0.97 }}
@@ -113,8 +114,10 @@ function DesktopRoll() {
       setTravel(Math.max(0, t.scrollWidth - window.innerWidth + window.innerWidth * 0.3))
     }
     measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
+    // re-mesure si la bande change de taille (polices, images, redimensionnement)
+    const ro = new ResizeObserver(measure)
+    if (track.current) ro.observe(track.current)
+    return () => ro.disconnect()
   }, [])
 
   const line = wavyLine(400, 18)
@@ -126,7 +129,7 @@ function DesktopRoll() {
         </div>
         <motion.div ref={track} className="roll-desktop__track" style={{ x }}>
           {ROLL.map((_, i) => (
-            <div key={i} className={`roll-desktop__slot roll-desktop__slot--${i % 3}`}>
+            <div key={i} className={`roll-desktop__slot roll-desktop__slot--${i % 3}`} style={{ aspectRatio: ROLL[i].ratio }}>
               {slots[i] && <DesktopPhoto i={i} x={x} slot={slots[i]} />}
             </div>
           ))}
