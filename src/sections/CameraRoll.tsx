@@ -21,9 +21,9 @@ const ROT = [-3, 4, -1, 3, -4, 2]
 // Une photo : chute à l'entrée, flou selon la distance au centre (0 = au centre, 1 = loin),
 // flash blanc + horodatage tapé la première fois qu'elle passe au centre.
 function Photo({ i, distance, className }: { i: number; distance: MotionValue<number>; className?: string }) {
-  const blur = useTransform(distance, [0, 0.35, 1], [0, 2, 7])
+  const blur = useTransform(distance, [0, 0.4, 1], [0, 1, 3])
   const filter = useMotionTemplate`blur(${blur}px) grayscale(1)`
-  const opacity = useTransform(distance, [0, 1], [1, 0.68])
+  const opacity = useTransform(distance, [0, 1], [1, 0.82])
   const [focused, setFocused] = useState(false)
   useMotionValueEvent(distance, 'change', (d) => {
     if (d < 0.18 && !focused) setFocused(true)

@@ -74,8 +74,9 @@ export const EASTER_EGG = {
   message: ["you're still up?", 'me too.'],
 }
 
-// ⚠️ extrait audio autorisé à fournir (ex. '/audio/ambient.mp3'). null = pas de choix du son au loader.
-export const AMBIENT_AUDIO: string | null = null
+// Son de fond : le dernier single (déjà sorti, donc rien ne fuite de l'album).
+// Si le fichier est absent, une ambiance générée dans le navigateur prend le relais.
+export const AMBIENT_AUDIO: string | null = '/audio/false-sense-of-an-ego.mp3'
 
 // ⚠️ à compléter avec l'éditeur du site
 export const LEGAL = {

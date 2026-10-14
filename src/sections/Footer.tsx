@@ -89,8 +89,7 @@ export function Footer({ now }: { now: Date }) {
         <div className="footer__end-sticky">
           <motion.div className="footer__vignette" style={{ background: vignette }} aria-hidden />
           <motion.div className="footer__night" style={{ opacity: textOpacity }}>
-            <span className="hand footer__goodnight">good night.</span>
-            <span className="label">{clock12(now)}</span>
+            <span className="mono footer__end-title">{RELEASE.title}</span>
             <button className="label footer__rewind" onClick={run}>
               ◂◂ rewind
             </button>
@@ -108,7 +107,7 @@ export function Footer({ now }: { now: Date }) {
             transition={{ duration: 0.3 }}
             aria-hidden
           >
-            <span className={`mono rewind__digits ${digits === RELEASE.title ? 'offset' : ''}`}>{digits}</span>
+            <span className="mono rewind__digits">{digits}</span>
             <span className="label">◂◂ rewinding</span>
           </motion.div>
         )}

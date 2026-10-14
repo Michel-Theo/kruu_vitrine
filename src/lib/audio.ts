@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import { AMBIENT_AUDIO } from '../config'
 
-// Ambiance sonore. Si AMBIENT_AUDIO (un extrait autorisé) est renseigné, on le joue en boucle.
+// Son de fond. Si AMBIENT_AUDIO est renseigné et que le fichier existe, on le joue en boucle.
 // Sinon, une ambiance « chambre la nuit » est générée dans le navigateur :
 // souffle grave, nappe douce qui respire, craquements de vinyle.
 
@@ -9,9 +9,12 @@ const listeners = new Set<() => void>()
 let playing = false
 const emit = () => listeners.forEach((l) => l())
 
-let file: HTMLAudioElement | null = null
 let ctx: AudioContext | null = null
 let master: GainNode | null = null
+let usingFile = false
+
+const FILE_VOLUME = 0.45
+const AMBIENT_VOLUME = 0.6
 
 function noiseBuffer(ac: AudioContext, seconds: number, brown: boolean) {
   const buf = ac.createBuffer(1, ac.sampleRate * seconds, ac.sampleRate)
@@ -29,11 +32,40 @@ function noiseBuffer(ac: AudioContext, seconds: number, brown: boolean) {
   return buf
 }
 
-function buildAmbient() {
+function setupContext() {
   const ac = new AudioContext()
   const out = ac.createGain()
   out.gain.value = 0
   out.connect(ac.destination)
+  ctx = ac
+  master = out
+  return { ac, out }
+}
+
+// le fichier passe par Web Audio pour pouvoir faire des fondus propres
+async function tryFile(): Promise<boolean> {
+  if (!AMBIENT_AUDIO) return false
+  const { ac, out } = setupContext()
+  const el = new Audio(AMBIENT_AUDIO)
+  el.loop = true
+  el.crossOrigin = 'anonymous'
+  // branché avant la lecture : le son démarre à volume 0, puis fondu
+  ac.createMediaElementSource(el).connect(out)
+  try {
+    await el.play()
+  } catch {
+    // fichier absent ou illisible : on referme ce contexte et on passe à l'ambiance générée
+    await ac.close()
+    ctx = null
+    master = null
+    return false
+  }
+  usingFile = true
+  return true
+}
+
+function buildAmbient() {
+  const { ac, out } = setupContext()
 
   // souffle de la pièce
   const room = ac.createBufferSource()
@@ -82,33 +114,20 @@ function buildAmbient() {
   crackleGain.gain.value = 0.35
   crackle.connect(crackleHp).connect(crackleGain).connect(out)
   crackle.start()
-
-  ctx = ac
-  master = out
 }
 
 export const hasAudio = true
 
 export async function setSound(on: boolean) {
   try {
-    if (AMBIENT_AUDIO) {
-      if (!file) {
-        file = new Audio(AMBIENT_AUDIO)
-        file.loop = true
-        file.volume = 0.5
-      }
-      if (on) await file.play()
-      else file.pause()
-    } else {
-      if (on && !ctx) buildAmbient()
-      if (ctx && master) {
-        if (on) await ctx.resume()
-        const now = ctx.currentTime
-        master.gain.cancelScheduledValues(now)
-        master.gain.setValueAtTime(master.gain.value, now)
-        // fondu d'entrée 2 s, de sortie 0,6 s
-        master.gain.linearRampToValueAtTime(on ? 0.6 : 0, now + (on ? 2 : 0.6))
-      }
+    if (on && !ctx && !(await tryFile())) buildAmbient()
+    if (ctx && master) {
+      if (on) await ctx.resume()
+      const now = ctx.currentTime
+      master.gain.cancelScheduledValues(now)
+      master.gain.setValueAtTime(master.gain.value, now)
+      // fondu d'entrée 2 s, de sortie 0,6 s
+      master.gain.linearRampToValueAtTime(on ? (usingFile ? FILE_VOLUME : AMBIENT_VOLUME) : 0, now + (on ? 2 : 0.6))
     }
     playing = on
   } catch {

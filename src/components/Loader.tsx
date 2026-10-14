@@ -121,7 +121,7 @@ export function Loader({ onEnter }: { onEnter: (withSound: boolean) => void }) {
       >
         <div className="loader__clock">
           <span
-            className={`mono loader__digits ${ready ? 'offset' : ''}`}
+            className="mono loader__digits"
             style={{ opacity: 0.35 + 0.65 * Math.min(1, minutes / 120) }}
             aria-live="off"
           >
