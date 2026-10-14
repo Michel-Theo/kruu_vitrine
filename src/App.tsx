@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, MotionConfig } from 'motion/react'
+import { Cursor } from './components/Cursor'
+import { EasterEgg } from './components/EasterEgg'
 import { Grain } from './components/Grain'
 import { Loader } from './components/Loader'
+import { TapSplatter } from './components/TapSplatter'
 import { Thread } from './components/Thread'
 import { TopBar } from './components/TopBar'
 import { useNow } from './hooks/useNow'
+import { useTabTitle } from './hooks/useTabTitle'
 import { setSound } from './lib/audio'
 import { Album } from './sections/Album'
 import { CameraRoll } from './sections/CameraRoll'
@@ -20,6 +24,7 @@ export function App() {
   const now = useNow()
   const [entered, setEntered] = useState(SKIP_LOADER)
   const chapters = useRef<HTMLDivElement>(null)
+  useTabTitle()
 
   useEffect(() => {
     document.body.classList.toggle('is-locked', !entered)
@@ -45,6 +50,9 @@ export function App() {
         </div>
       </main>
       <Footer now={now} />
+      <EasterEgg now={now} enabled={entered} />
+      <TapSplatter />
+      <Cursor />
       <Grain />
     </MotionConfig>
   )

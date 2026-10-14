@@ -152,7 +152,7 @@ export function Loader({ onEnter }: { onEnter: (withSound: boolean) => void }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              <button className="circle-btn" onClick={() => onEnter(hasAudio)} autoFocus>
+              <button className="circle-btn" onClick={() => onEnter(hasAudio)}>
                 <Scribble shape={CIRCLE} strokeWidth={3} offset={[3, 2]} className="circle-btn__ring" delay={0.6} stretch />
                 <span>{hasAudio ? 'enter with sound' : 'enter'}</span>
               </button>
