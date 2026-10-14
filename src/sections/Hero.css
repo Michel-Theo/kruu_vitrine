@@ -141,6 +141,51 @@
   height: 100%;
 }
 
+/* mobile : tout le haut de page tient dans la hauteur visible (barres du navigateur et d'Instagram comprises) */
+@media (max-width: 899px) {
+  .hero {
+    height: 100svh;
+    min-height: 540px;
+    padding: 60px var(--gutter) 14px;
+    justify-content: center;
+    gap: 1.6svh;
+  }
+
+  .hero__cover-wrap {
+    width: min(84vw, 40svh);
+  }
+
+  .hero__hint {
+    font-size: 22px;
+    bottom: -28px;
+  }
+
+  .hero__text {
+    gap: 1.4svh;
+    margin-top: 24px;
+  }
+
+  .hero__title {
+    font-size: clamp(56px, min(24vw, 11svh), 120px);
+  }
+
+  .hero .countdown {
+    font-size: clamp(20px, min(6.4vw, 3.6svh), 28px);
+  }
+
+  .hero__cta .circle-btn {
+    min-width: 200px;
+    min-height: 64px;
+    font-size: 22px;
+  }
+
+  .hero__scroll {
+    bottom: 10px;
+    width: 20px;
+    height: 40px;
+  }
+}
+
 @media (min-width: 900px) {
   .hero {
     flex-direction: row;
