@@ -12,3 +12,17 @@ Site 100 % statique, sans backend, en React.
 - `main` : version en ligne
 - `develop` : intégration
 - `feature/*` : une branche par fonctionnalité, partie de `develop`, fusionnée par pull request
+
+## Développement
+
+Prérequis : Node 22+.
+
+```sh
+npm install
+npm run dev      # serveur de dev
+npm run build    # build statique dans dist/
+npm run preview  # sert dist/ en local
+npm run lint
+```
+
+Tout ce qui change (dates, liens, contenus) se trouve dans [`src/config.ts`](src/config.ts).
