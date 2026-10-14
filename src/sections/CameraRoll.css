@@ -1,0 +1,124 @@
+.roll {
+  position: relative;
+  padding: 96px var(--gutter) 64px;
+}
+
+.roll__aside {
+  font-size: 28px;
+  transform: rotate(-5deg);
+  white-space: nowrap;
+}
+
+.roll-photo {
+  position: relative;
+  margin: 0;
+}
+
+.roll-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.roll-photo__flash {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  pointer-events: none;
+}
+
+.roll-photo__stamp {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  font-size: 10px;
+  color: var(--blue);
+}
+
+/* mobile : collage vertical, tailles et alignements irréguliers */
+.roll-mobile {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  row-gap: 28px;
+  margin-top: 36px;
+}
+
+.roll-slot .roll-photo {
+  aspect-ratio: 4 / 5;
+}
+
+.roll-slot--0 { grid-column: 1 / 8; }
+.roll-slot--1 { grid-column: 6 / 13; margin-top: -40%; }
+.roll-slot--2 { grid-column: 2 / 12; }
+.roll-slot--3 { grid-column: 1 / 7; }
+.roll-slot--4 { grid-column: 7 / 13; margin-top: 30%; }
+.roll-slot--5 { grid-column: 3 / 11; }
+
+.roll-slot--2 .roll-photo {
+  aspect-ratio: 4 / 5;
+}
+
+.roll-mobile__heart {
+  position: absolute;
+  width: 46px;
+  right: 6%;
+  top: 30%;
+  transform: rotate(14deg);
+}
+
+/* desktop : bande horizontale épinglée */
+.roll-desktop {
+  height: 320vh;
+  margin: 0 calc(var(--gutter) * -1);
+}
+
+.roll-desktop__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 40px;
+}
+
+.roll-desktop__head {
+  padding: 0 var(--gutter);
+}
+
+.roll-desktop__track {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  padding: 0 30vw 0 var(--gutter);
+  width: max-content;
+}
+
+.roll-desktop__slot {
+  flex: none;
+}
+
+.roll-desktop__slot .roll-photo {
+  height: 100%;
+}
+
+.roll-desktop__slot--0 { width: 24vw; height: 46vh; }
+.roll-desktop__slot--1 { width: 20vw; height: 38vh; margin-top: -6vh; }
+.roll-desktop__slot--2 { width: 22vw; height: 42vh; margin-top: 8vh; }
+
+.roll-desktop__progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.roll-desktop__progress svg {
+  width: 400px;
+  height: 18px;
+  overflow: visible;
+}
