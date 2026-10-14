@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { ALBUM_SINGLES, RELEASE, spotifyTrackUrl, YOUTUBE_URL, type AlbumSingle } from '../config'
 import { DrawnLink } from '../components/DrawnLink'
 import { BlurWords, SectionHead } from '../components/SectionHead'
 import { Splatter } from '../components/Splatter'
+import { setSound } from '../lib/audio'
 import { pad } from '../lib/time'
 import './NowPlaying.css'
 
@@ -43,6 +44,25 @@ function Player({ track, loaded, onLoad }: { track: AlbumSingle; loaded: boolean
 export function NowPlaying() {
   const [current, setCurrent] = useState(0)
   const [loaded, setLoaded] = useState(false)
+
+  // Un clic dans l'iframe Spotify n'est pas visible par la page, mais la fenêtre perd le focus
+  // au profit de l'iframe : on s'en sert pour couper le son de fond quand on lance un titre.
+  useEffect(() => {
+    if (!loaded) return
+    const onBlur = () => {
+      setTimeout(() => {
+        if (document.activeElement?.classList.contains('player__embed')) setSound(false)
+      })
+    }
+    window.addEventListener('blur', onBlur)
+    return () => window.removeEventListener('blur', onBlur)
+  }, [loaded])
+
+  const loadPlayer = () => {
+    // le lecteur Spotify remplace le son de fond
+    setSound(false)
+    setLoaded(true)
+  }
   const coverRef = useRef<HTMLDivElement>(null)
   const track = ALBUM_SINGLES[current]
 
@@ -82,7 +102,7 @@ export function NowPlaying() {
           <span className="label">
             track {pad(track.n)} on {RELEASE.title} · single — {track.dateLabel}
           </span>
-          <Player track={track} loaded={loaded} onLoad={() => setLoaded(true)} />
+          <Player track={track} loaded={loaded} onLoad={loadPlayer} />
           <nav className="now__links" aria-label="listen">
             <DrawnLink href={spotifyTrackUrl(track.spotifyTrackId)}>spotify</DrawnLink>
             <DrawnLink href={track.appleUrl}>apple music</DrawnLink>
