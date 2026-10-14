@@ -36,11 +36,13 @@
 
 .loader__clock {
   position: relative;
+  /* les positions en em du cœur se calent sur la taille des chiffres */
+  font-size: clamp(80px, 23vw, 240px);
 }
 
 .loader__digits {
   display: block;
-  font-size: clamp(80px, 23vw, 240px);
+  font-size: 1em;
   font-weight: 200;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -50,9 +52,9 @@
 
 .loader__heart {
   position: absolute;
-  right: -0.2em;
-  top: -0.55em;
-  width: clamp(40px, 12vw, 90px);
+  right: 0.12em;
+  top: -0.62em;
+  width: 0.55em;
 }
 
 .loader__line,

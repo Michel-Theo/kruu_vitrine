@@ -19,6 +19,20 @@
   letter-spacing: -0.02em;
 }
 
+.topbar__nav {
+  display: none;
+}
+
+.topbar__nav a {
+  transition: color var(--dur-base) var(--ease-nuit), text-shadow var(--dur-base) var(--ease-nuit);
+}
+
+.topbar__nav a:hover,
+.topbar__nav a:focus-visible {
+  color: var(--paper);
+  text-shadow: 2px 2px 0 var(--blue);
+}
+
 .topbar__right {
   display: flex;
   align-items: center;
@@ -57,5 +71,15 @@
   }
   .topbar__right {
     font-size: 13px;
+  }
+
+  .topbar__nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 36px;
+    font-size: 14px;
+    color: #bdbdbd;
   }
 }

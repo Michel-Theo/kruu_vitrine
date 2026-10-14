@@ -11,7 +11,7 @@
 
 .now__cover-wrap {
   position: relative;
-  width: min(100%, 440px);
+  width: min(78vw, 440px);
   margin: 0 auto;
 }
 

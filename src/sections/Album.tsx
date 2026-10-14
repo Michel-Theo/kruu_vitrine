@@ -45,6 +45,25 @@ function HiddenRow({ n, width }: { n: number; width: number }) {
   )
 }
 
+// Titre déjà sorti en single : en clair, cliquable, avec « out now »
+function OutRow({ n, name, href }: { n: number; name: string; href: string }) {
+  return (
+    <motion.li
+      className="track"
+      initial={{ opacity: 0, x: -8, filter: 'blur(6px)' }}
+      whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: n * 0.05, ease: EASE }}
+    >
+      <a className="track__btn track--revealed" href={href} target="_blank" rel="noopener noreferrer">
+        <span className="mono ash track__n">{pad(n)}</span>
+        <span className="track__name">{name}</span>
+        <span className="mono blue track__time">out now</span>
+      </a>
+    </motion.li>
+  )
+}
+
 export function Album({ now, release }: { now: Date; release: ReleaseState }) {
   const { released, tracks, trackCount } = release
   const widths = useMemo(() => Array.from({ length: trackCount }, (_, i) => 110 + ((i * 73) % 130)), [trackCount])
@@ -84,7 +103,10 @@ export function Album({ now, release }: { now: Date; release: ReleaseState }) {
                 )}
               </motion.li>
             ))
-          : widths.map((w, i) => <HiddenRow key={i} n={i + 1} width={w} />)}
+          : widths.map((w, i) => {
+              const out = RELEASE.outNow.find((t) => t.n === i + 1)
+              return out ? <OutRow key={i} n={out.n} name={out.name} href={out.href} /> : <HiddenRow key={i} n={i + 1} width={w} />
+            })}
       </ol>
 
       {!tracks && (

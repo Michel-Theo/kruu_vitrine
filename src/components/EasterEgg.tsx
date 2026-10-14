@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { EASTER_EGG, RELEASE } from '../config'
-import { HEART } from '../lib/scribbles'
-import { isSecretMinute, pad } from '../lib/time'
+import { useSound } from '../lib/audio'
+import { HEART, UNDERLINE } from '../lib/scribbles'
+import { clock12, isSecretMinute, pad } from '../lib/time'
 import { Scribble } from './Scribble'
 import './EasterEgg.css'
 
@@ -13,7 +14,15 @@ const FORCE = new URLSearchParams(window.location.search).has('egg')
 export function EasterEgg({ now, enabled }: { now: Date; enabled: boolean }) {
   const minuteKey = `${now.toDateString()} ${now.getHours()}:${now.getMinutes()}`
   const [dismissed, setDismissed] = useState<string | null>(null)
+  const sound = useSound()
+  const close = () => setDismissed(minuteKey)
   const active = enabled && (FORCE || isSecretMinute(now)) && dismissed !== minuteKey
+  useEffect(() => {
+    if (!active) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setDismissed(minuteKey)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [active, minuteKey])
   const nextMinute = `${pad(EASTER_EGG.hour12)}:${pad(EASTER_EGG.minute + 1)}`
 
   return (
@@ -23,6 +32,7 @@ export function EasterEgg({ now, enabled }: { now: Date; enabled: boolean }) {
           className="egg"
           role="dialog"
           aria-label="a message from kruu"
+          onClick={close}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8 } }}
@@ -30,8 +40,16 @@ export function EasterEgg({ now, enabled }: { now: Date; enabled: boolean }) {
         >
           {/* flash blanc */}
           <motion.div className="egg__flash" initial={{ opacity: 1 }} animate={{ opacity: 0 }} transition={{ duration: 0.18 }} aria-hidden />
-          <button className="egg__close mono" onClick={() => setDismissed(minuteKey)} aria-label="close">
-            ✕
+          <div className="egg__top">
+            <span className="egg__logo">kruu</span>
+            <span className="mono egg__clock">
+              <span>sound {sound ? 'on' : 'off'}</span>
+              <span className="egg__dot" aria-hidden />
+              {clock12(now)}
+            </span>
+          </div>
+          <button className="sr-only" onClick={close}>
+            close
           </button>
           <span className="mono egg__time offset">{RELEASE.title}</span>
           <div className="egg__cover">
@@ -49,6 +67,7 @@ export function EasterEgg({ now, enabled }: { now: Date; enabled: boolean }) {
             ))}
           </motion.p>
           <span className="label egg__note">this message disappears at {nextMinute}</span>
+          <Scribble shape={UNDERLINE} className="egg__underline" color="var(--ink)" shadow="var(--blue)" strokeWidth={3} offset={[2, 2]} play delay={1.6} />
         </motion.div>
       )}
     </AnimatePresence>

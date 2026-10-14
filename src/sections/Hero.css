@@ -17,14 +17,14 @@
   background-size: cover;
   background-position: center;
   filter: blur(60px);
-  opacity: 0.28;
+  opacity: 0.5;
 }
 
 .hero__bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 38%, rgba(10, 10, 10, 0) 25%, var(--ink) 75%);
+  background: radial-gradient(ellipse at 50% 40%, rgba(10, 10, 10, 0) 30%, rgba(10, 10, 10, 0.85) 100%);
 }
 
 .hero__cover-wrap {
@@ -105,6 +105,15 @@
   font-weight: 500;
 }
 
+.hero__date {
+  color: var(--ash);
+}
+
+.hero__by,
+.hero__eyebrow {
+  display: none;
+}
+
 .hero__cta {
   display: flex;
   flex-direction: column;
@@ -162,6 +171,23 @@
 
   .hero__row {
     font-size: 16px;
+  }
+
+  .hero__kicker {
+    display: none;
+  }
+
+  .hero__date {
+    color: var(--paper);
+  }
+
+  .hero__by,
+  .hero__eyebrow {
+    display: inline;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: -8px;
   }
 
   .hero__cta {

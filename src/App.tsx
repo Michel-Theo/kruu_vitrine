@@ -47,8 +47,10 @@ export function App() {
         <div ref={chapters} className="chapters">
           <Thread container={chapters} />
           <CameraRoll />
-          <NowPlaying />
-          <Album now={now} release={release} />
+          <div className="duo">
+            <NowPlaying />
+            <Album now={now} release={release} />
+          </div>
         </div>
       </main>
       <Footer now={now} />

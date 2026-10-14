@@ -167,7 +167,7 @@ export function Loader({ onEnter }: { onEnter: (withSound: boolean) => void }) {
       </motion.div>
 
       <div className="loader__bottom">
-        {hasAudio ? <span className="label">headphones on</span> : <span className="hand loader__hand">wait for me</span>}
+        {ready && hasAudio ? <span className="label">headphones on</span> : <span className="hand loader__hand">wait for me</span>}
       </div>
     </motion.div>
   )

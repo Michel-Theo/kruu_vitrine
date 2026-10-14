@@ -52,7 +52,7 @@ export function Footer({ now }: { now: Date }) {
   const textOpacity = useTransform(scrollYProgress, [0.55, 0.9], [0, 1])
 
   return (
-    <footer className="footer" aria-label="links">
+    <footer className="footer" id="links" aria-label="links">
       <div className="footer__inner">
         <Scribble shape={KR} className="footer__kr" duration={1.2} />
         <ul className="footer__links">

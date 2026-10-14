@@ -48,3 +48,41 @@
   height: 56px;
   margin: -28px 0 0 -28px;
 }
+
+/* desktop : now playing et l'album côte à côte, comme dans la maquette */
+@media (min-width: 1100px) {
+  .duo {
+    display: grid;
+    grid-template-columns: minmax(0, 440px) minmax(0, 560px);
+    justify-content: center;
+    align-items: start;
+    gap: 7vw;
+    padding: 0 var(--gutter);
+  }
+
+  .duo .now,
+  .duo .album {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    max-width: none;
+  }
+
+  .duo .now__grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+
+  .duo .now__cover-wrap {
+    width: 100%;
+  }
+
+  .duo .now__more {
+    display: none;
+  }
+
+  .duo .album__title {
+    font-size: clamp(110px, 10vw, 150px);
+  }
+}

@@ -4,7 +4,7 @@
 }
 
 .roll__aside {
-  font-size: 28px;
+  font-size: clamp(28px, 3vw, 44px);
   transform: rotate(-5deg);
   white-space: nowrap;
 }
@@ -49,11 +49,11 @@
   aspect-ratio: 4 / 5;
 }
 
-.roll-slot--0 { grid-column: 1 / 8; }
-.roll-slot--1 { grid-column: 6 / 13; margin-top: -40%; }
+.roll-slot--0 { grid-column: 1 / 7; margin-right: 4%; }
+.roll-slot--1 { grid-column: 7 / 13; margin: 12% 0 0 6%; }
 .roll-slot--2 { grid-column: 2 / 12; }
-.roll-slot--3 { grid-column: 1 / 7; }
-.roll-slot--4 { grid-column: 7 / 13; margin-top: 30%; }
+.roll-slot--3 { grid-column: 1 / 7; margin-right: 4%; }
+.roll-slot--4 { grid-column: 7 / 13; margin: 8% 0 0 6%; }
 .roll-slot--5 { grid-column: 3 / 11; }
 
 .roll-slot--2 .roll-photo {
@@ -93,7 +93,7 @@
 .roll-desktop__track {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 40px;
   padding: 0 30vw 0 var(--gutter);
   width: max-content;
 }
@@ -106,9 +106,9 @@
   height: 100%;
 }
 
-.roll-desktop__slot--0 { width: 24vw; height: 46vh; }
-.roll-desktop__slot--1 { width: 20vw; height: 38vh; margin-top: -6vh; }
-.roll-desktop__slot--2 { width: 22vw; height: 42vh; margin-top: 8vh; }
+.roll-desktop__slot--0 { width: 21vw; height: 44vh; }
+.roll-desktop__slot--1 { width: 19vw; height: 40vh; margin-top: -6vh; }
+.roll-desktop__slot--2 { width: 29vw; height: 58vh; margin-top: 4vh; }
 
 .roll-desktop__progress {
   display: flex;

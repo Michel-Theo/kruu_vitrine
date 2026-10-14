@@ -17,6 +17,12 @@ export const RELEASE = {
   // secours si l'API d'Apple ne répond pas : titres affichés après la sortie
   tracks: null as string[] | null,
   trackCount: 12,
+  // titres de l'album déjà sortis en single : affichés en clair dans la tracklist floutée
+  outNow: [
+    { n: 4, name: 'i was uninspired', href: 'https://music.apple.com/us/album/i-was-uninspired/6817764595?i=6817764599' },
+    { n: 5, name: 'DEMAND', href: 'https://open.spotify.com/track/02jHrxlIWXJKQmPHNfUX8z' },
+    { n: 8, name: 'false sense of an ego', href: 'https://open.spotify.com/track/5oeUQveNCzLPTKgXbVCyf1' },
+  ],
 }
 
 export const SINGLE = {
