@@ -40,7 +40,7 @@ Le site est 100 % statique : pas de serveur, pas de Docker, pas de VPS. Le build
    - Framework preset : `Vite` (ou aucun)
    - Build command : `npm run build`
    - Build output directory : `dist`
-   - Variable d'environnement : `SITE_URL` = l'URL finale (ex. `https://kruu-vitrine.pages.dev`, ou le domaine perso)
+   - Variable d'environnement : `SITE_URL` = l'URL finale (ex. `https://kruu-1134.pages.dev`, ou le domaine perso)
 4. Chaque merge sur `main` met le site en ligne. Chaque PR obtient une URL de prévisualisation.
 
 Le site est alors accessible sur `https://<nom-du-projet>.pages.dev`.
