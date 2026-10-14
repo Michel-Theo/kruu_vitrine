@@ -1,0 +1,19 @@
+.chapters {
+  position: relative;
+}
+
+.thread {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 900px) {
+  .thread {
+    left: 12px;
+    width: 30px;
+  }
+}
