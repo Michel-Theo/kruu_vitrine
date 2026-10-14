@@ -11,7 +11,14 @@
 .album__title {
   font-size: clamp(96px, 30vw, 200px);
   font-weight: 200;
-  margin-left: -0.04em;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .album__title {
+    text-align: left;
+    margin-left: -0.04em;
+  }
 }
 
 .album__list {

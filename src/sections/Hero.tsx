@@ -73,7 +73,7 @@ export function Hero({ now, entered, released }: { now: Date; entered: boolean; 
           {released ? 'the new album' : 'new album'}
         </motion.span>
         <motion.h1
-          className="mono offset hero__title"
+          className="mono hero__title"
           style={{ scale: titleScale, y: titleY, opacity: titleOpacity }}
           aria-label={RELEASE.title}
         >

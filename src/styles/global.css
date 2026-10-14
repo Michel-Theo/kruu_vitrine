@@ -94,11 +94,6 @@ button {
   color: var(--blue);
 }
 
-/* ombre bleue décalée, la signature de la DA */
-.offset {
-  text-shadow: 0.02em 0.015em 0 rgba(192, 216, 248, 0.75);
-}
-
 .label {
   font-family: var(--font-mono);
   font-size: 11px;

@@ -87,8 +87,11 @@
   gap: 8px;
 }
 
-.footer__goodnight {
-  font-size: 44px;
+.footer__end-title {
+  font-size: clamp(80px, 23vw, 200px);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
 
 .footer__rewind {
@@ -157,8 +160,3 @@
   align-self: flex-start;
 }
 
-@media (min-width: 900px) {
-  .footer__goodnight {
-    font-size: 64px;
-  }
-}

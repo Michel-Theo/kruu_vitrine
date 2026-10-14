@@ -55,7 +55,7 @@ export function TopBar({ now, visible }: { now: Date; visible: boolean }) {
           <AnimatePresence mode="wait" initial={false}>
             <motion.time
               key={handoff ? 'h' : 'c'}
-              className={handoff ? 'offset topbar__time--handoff' : undefined}
+              className={handoff ? 'topbar__time--handoff' : undefined}
               initial={{ opacity: 0, y: handoff ? 10 : -6, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}

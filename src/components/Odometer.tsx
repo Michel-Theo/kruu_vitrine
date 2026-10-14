@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import './Odometer.css'
 
@@ -11,16 +11,10 @@ export function Odometer({ from, to, className = '' }: { from: string; to: strin
   const reduce = useReducedMotion()
   // `from` est figé au premier affichage
   const [start] = useState(from)
-  const [landed, setLanded] = useState(false)
-  useEffect(() => {
-    if (!inView) return
-    const id = setTimeout(() => setLanded(true), reduce ? 0 : 1500)
-    return () => clearTimeout(id)
-  }, [inView, reduce])
 
   let reel = 0
   return (
-    <span ref={ref} className={`odometer mono ${landed ? 'offset' : ''} ${className}`} aria-label={to}>
+    <span ref={ref} className={`odometer mono ${className}`} aria-label={to}>
       {to.split('').map((ch, i) => {
         if (!DIGITS.includes(ch)) {
           return (

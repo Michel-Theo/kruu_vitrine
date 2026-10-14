@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'motion/react'
 
 // réglages : plus FPS est bas et MAX_ALPHA faible, plus le grain est doux pour les yeux
-const FPS = 8
+const FPS = 6
 const TILE = 256
 const FRAMES = 6
-// chaque pixel est blanc ou noir, avec une opacité aléatoire de 0 à ~13 %
-const MAX_ALPHA = 34
+// chaque pixel est blanc ou noir, avec une opacité aléatoire de 0 à ~8 %
+const MAX_ALPHA = 20
 
 function makeTile() {
   const c = document.createElement('canvas')
@@ -24,7 +24,7 @@ function makeTile() {
   return c
 }
 
-// Bruit fin plein écran (1 grain = 1 pixel CSS), rejoué 8 fois par seconde.
+// Bruit fin plein écran (1 grain = 1 pixel CSS), rejoué 6 fois par seconde.
 export function Grain() {
   const ref = useRef<HTMLCanvasElement>(null)
   const reduce = useReducedMotion()

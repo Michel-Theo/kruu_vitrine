@@ -51,7 +51,7 @@ export function EasterEgg({ now, enabled }: { now: Date; enabled: boolean }) {
           <button className="sr-only" onClick={close}>
             close
           </button>
-          <span className="mono egg__time offset">{RELEASE.title}</span>
+          <span className="mono egg__time">{RELEASE.title}</span>
           <div className="egg__cover">
             <img src={RELEASE.cover} alt="" />
             <Scribble shape={HEART} className="egg__heart" color="var(--blue)" shadow="var(--ink)" play delay={0.8} />
