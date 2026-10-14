@@ -1,21 +1,22 @@
-import { useState } from 'react'
-import { motion } from 'motion/react'
-import { OTHER_RELEASES, SINGLE } from '../config'
+import { useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import { ALBUM_SINGLES, RELEASE, spotifyTrackUrl, YOUTUBE_URL, type AlbumSingle } from '../config'
 import { DrawnLink } from '../components/DrawnLink'
 import { BlurWords, SectionHead } from '../components/SectionHead'
 import { Splatter } from '../components/Splatter'
+import { pad } from '../lib/time'
 import './NowPlaying.css'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-function Player({ onPlay }: { onPlay: () => void }) {
-  const [loaded, setLoaded] = useState(false)
+function Player({ track, loaded, onLoad }: { track: AlbumSingle; loaded: boolean; onLoad: () => void }) {
   if (loaded) {
     return (
       <iframe
+        key={track.spotifyTrackId}
         className="player__embed"
-        title={`${SINGLE.title} on Spotify`}
-        src={`https://open.spotify.com/embed/track/${SINGLE.spotifyTrackId}?utm_source=generator&theme=0`}
+        title={`${track.title} on Spotify`}
+        src={`https://open.spotify.com/embed/track/${track.spotifyTrackId}?utm_source=generator&theme=0`}
         height={80}
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
@@ -24,16 +25,10 @@ function Player({ onPlay }: { onPlay: () => void }) {
   }
   // l'embed (et ses cookies) n'est chargé qu'au clic
   return (
-    <button
-      className="player"
-      onClick={() => {
-        setLoaded(true)
-        onPlay()
-      }}
-    >
-      <img src={SINGLE.cover} alt="" className="player__thumb" />
+    <button className="player" onClick={onLoad}>
+      <img src={track.cover} alt="" className="player__thumb" />
       <span className="player__text">
-        <span className="player__title">{SINGLE.title}</span>
+        <span className="player__title">{track.title}</span>
         <span className="mono ash player__sub">kruu · play on spotify</span>
       </span>
       <span className="player__play" aria-hidden>
@@ -46,53 +41,76 @@ function Player({ onPlay }: { onPlay: () => void }) {
 }
 
 export function NowPlaying() {
-  const [playing, setPlaying] = useState(false)
+  const [current, setCurrent] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+  const coverRef = useRef<HTMLDivElement>(null)
+  const track = ALBUM_SINGLES[current]
+
+  const pick = (i: number) => {
+    if (i === current) return
+    setCurrent(i)
+    // sur mobile la pochette peut être au-dessus de l'écran : on remonte pour voir le changement
+    const top = coverRef.current?.getBoundingClientRect().top ?? 0
+    if (top < 0) document.getElementById('now-playing')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <section className="now" id="now-playing" aria-label="now playing">
       <SectionHead label="03 / now playing" />
       <div className="now__grid">
-        <div className="now__cover-wrap">
-          <motion.img
-            src={SINGLE.cover}
-            alt={`${SINGLE.title} single cover`}
-            className="now__cover"
-            loading="lazy"
-            initial={{ filter: 'blur(20px)', scale: 1.04, opacity: 0.6 }}
-            whileInView={{ filter: 'blur(0px)', scale: 1, opacity: 1 }}
-            viewport={{ once: true, margin: '0px 0px -15% 0px' }}
-            transition={{ duration: 0.8, ease: EASE }}
-          />
-          <Splatter seed={3} count={16} className="now__splat now__splat--a" breathing={playing} delay={0.5} />
-          <Splatter seed={11} count={14} className="now__splat now__splat--b" breathing={playing} delay={0.6} />
+        <div ref={coverRef} className="now__cover-wrap">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.img
+              key={track.cover}
+              src={track.cover}
+              alt={`${track.title} cover`}
+              className="now__cover"
+              loading="lazy"
+              initial={{ filter: 'blur(20px)', scale: 1.04, opacity: 0.6 }}
+              whileInView={{ filter: 'blur(0px)', scale: 1, opacity: 1 }}
+              exit={{ filter: 'blur(16px)', scale: 0.97, opacity: 0, transition: { duration: 0.3 } }}
+              viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+              transition={{ duration: 0.8, ease: EASE }}
+            />
+          </AnimatePresence>
+          <Splatter key={`a${current}`} seed={3 + current * 5} count={16} className="now__splat now__splat--a" breathing={loaded} delay={0.5} />
+          <Splatter key={`b${current}`} seed={11 + current * 5} count={14} className="now__splat now__splat--b" breathing={loaded} delay={0.6} />
         </div>
 
         <div className="now__info">
-          <BlurWords text={SINGLE.title} className="now__title" />
-          <span className="label">single — {SINGLE.dateLabel}</span>
-          <Player onPlay={() => setPlaying(true)} />
+          <BlurWords key={track.title} text={track.title} className="now__title" />
+          <span className="label">
+            track {pad(track.n)} on {RELEASE.title} · single — {track.dateLabel}
+          </span>
+          <Player track={track} loaded={loaded} onLoad={() => setLoaded(true)} />
           <nav className="now__links" aria-label="listen">
-            {SINGLE.links.map((l) => (
-              <DrawnLink key={l.label} href={l.href}>
-                {l.label}
-              </DrawnLink>
-            ))}
+            <DrawnLink href={spotifyTrackUrl(track.spotifyTrackId)}>spotify</DrawnLink>
+            <DrawnLink href={track.appleUrl}>apple music</DrawnLink>
+            <DrawnLink href={YOUTUBE_URL}>youtube</DrawnLink>
           </nav>
 
           <div className="now__more">
-            <span className="label">also in 2026</span>
+            <span className="label">already out from {RELEASE.title}</span>
             <ul className="now__thumbs">
-              {OTHER_RELEASES.map((r, i) => (
+              {ALBUM_SINGLES.map((s, i) => (
                 <motion.li
-                  key={r.title}
+                  key={s.title}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.06, ease: EASE }}
                 >
-                  <a href={r.href} target="_blank" rel="noopener noreferrer">
-                    <img src={r.image} alt="" loading="lazy" />
-                    <span className="mono ash">{r.title}</span>
-                  </a>
+                  <button
+                    className={`now__thumb ${i === current ? 'is-current' : ''}`}
+                    onClick={() => pick(i)}
+                    aria-pressed={i === current}
+                    aria-label={`play ${s.title}`}
+                  >
+                    <img src={s.cover} alt="" loading="lazy" />
+                    <span className="mono">
+                      {pad(s.n)} · {s.title}
+                    </span>
+                  </button>
                 </motion.li>
               ))}
             </ul>

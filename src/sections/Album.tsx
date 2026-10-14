@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'motion/react'
-import { RELEASE } from '../config'
+import { ALBUM_SINGLES, RELEASE, spotifyTrackUrl } from '../config'
 import { CircleLink } from '../components/CircleLink'
 import { Odometer } from '../components/Odometer'
 import { Scribble } from '../components/Scribble'
@@ -104,8 +104,12 @@ export function Album({ now, release }: { now: Date; release: ReleaseState }) {
               </motion.li>
             ))
           : widths.map((w, i) => {
-              const out = RELEASE.outNow.find((t) => t.n === i + 1)
-              return out ? <OutRow key={i} n={out.n} name={out.name} href={out.href} /> : <HiddenRow key={i} n={i + 1} width={w} />
+              const out = ALBUM_SINGLES.find((t) => t.n === i + 1)
+              return out ? (
+                <OutRow key={i} n={out.n} name={out.title} href={spotifyTrackUrl(out.spotifyTrackId)} />
+              ) : (
+                <HiddenRow key={i} n={i + 1} width={w} />
+              )
             })}
       </ol>
 

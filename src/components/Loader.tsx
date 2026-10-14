@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReducedMotion } from 'motion/react'
-import { RELEASE, ROLL, SINGLE } from '../config'
+import { ALBUM_SINGLES, RELEASE, ROLL } from '../config'
 import { hasAudio } from '../lib/audio'
 import { CIRCLE, HEART, UNDERLINE, wavyLine } from '../lib/scribbles'
 import { pad } from '../lib/time'
@@ -13,7 +13,7 @@ const FLASHES = [0.22, 0.48, 0.74]
 const LINE = wavyLine(240)
 
 function preload(onProgress: (p: number) => void) {
-  const urls = [RELEASE.cover, SINGLE.cover, ...ROLL.slice(0, 3).map((r) => r.src)]
+  const urls = [RELEASE.cover, ALBUM_SINGLES[0].cover, ...ROLL.slice(0, 3).map((r) => r.src)]
   const jobs: Promise<unknown>[] = [
     ...urls.map(
       (src) =>

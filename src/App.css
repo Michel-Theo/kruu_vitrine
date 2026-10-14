@@ -78,10 +78,6 @@
     width: 100%;
   }
 
-  .duo .now__more {
-    display: none;
-  }
-
   .duo .album__title {
     font-size: clamp(110px, 10vw, 150px);
   }
