@@ -18,12 +18,17 @@ import './CameraRoll.css'
 const EASE = [0.22, 1, 0.36, 1] as const
 const ROT = [-3, 4, -1, 3, -4, 2]
 
-// Une photo : chute à l'entrée, flou selon la distance au centre (0 = au centre, 1 = loin),
-// flash blanc + horodatage tapé la première fois qu'elle passe au centre.
+// Une photo :
+// - entrée : elle tombe sur la page en tournant, comme un tirage jeté sur un lit ;
+// - au défilement : plus elle approche du centre de l'écran, plus elle se redresse, grandit et devient nette ;
+// - au centre la première fois : flash blanc + horodatage tapé.
 function Photo({ i, distance, className }: { i: number; distance: MotionValue<number>; className?: string }) {
   const blur = useTransform(distance, [0, 0.4, 1], [0, 1, 3])
   const filter = useMotionTemplate`blur(${blur}px) grayscale(1)`
   const opacity = useTransform(distance, [0, 1], [1, 0.82])
+  const base = ROT[i % ROT.length]
+  const rotate = useTransform(distance, [0, 1], [base * 0.25, base * 1.6])
+  const scale = useTransform(distance, [0, 1], [1.03, 0.92])
   const [focused, setFocused] = useState(false)
   useMotionValueEvent(distance, 'change', (d) => {
     if (d < 0.18 && !focused) setFocused(true)
@@ -32,24 +37,27 @@ function Photo({ i, distance, className }: { i: number; distance: MotionValue<nu
   return (
     <motion.figure
       className={`roll-photo ${className ?? ''}`}
-      initial={{ y: -120, rotate: ROT[i % ROT.length] * 4, opacity: 0 }}
-      whileInView={{ y: 0, rotate: ROT[i % ROT.length], opacity: 1 }}
-      viewport={{ once: true, margin: '0px 0px -5% 0px' }}
-      transition={{ duration: 0.7, ease: EASE, delay: (i % 3) * 0.08 }}
+      initial={{ y: -180, rotate: base * 5, scale: 1.1, opacity: 0 }}
+      whileInView={{ y: 0, rotate: 0, scale: 1, opacity: 1 }}
+      whileTap={{ scale: 0.97 }}
+      viewport={{ once: true, margin: '0px 0px -25% 0px' }}
+      transition={{ duration: 1, ease: EASE, delay: (i % 2) * 0.12 }}
     >
-      <motion.img src={photo.src} alt="" loading="lazy" style={{ filter, opacity }} draggable={false} />
-      {focused && (
-        <motion.span
-          className="roll-photo__flash"
-          initial={{ opacity: 0.55 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          aria-hidden
-        />
-      )}
-      <figcaption className="roll-photo__stamp mono">
-        {focused ? <TypeLine text={photo.stamp} /> : ' '}
-      </figcaption>
+      <motion.div className="roll-photo__inner" style={{ rotate, scale }}>
+        <motion.img src={photo.src} alt="" loading="lazy" style={{ filter, opacity }} draggable={false} />
+        {focused && (
+          <motion.span
+            className="roll-photo__flash"
+            initial={{ opacity: 0.75 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            aria-hidden
+          />
+        )}
+        <figcaption className="roll-photo__stamp mono">
+          {focused ? <TypeLine text={photo.stamp} /> : ' '}
+        </figcaption>
+      </motion.div>
     </motion.figure>
   )
 }
