@@ -92,7 +92,7 @@ export function Hero({ now, entered }: { now: Date; entered: boolean }) {
           transition={{ delay: 1.2, duration: 0.6 }}
         >
           <div className="hero__row">
-            <span className="hero__kicker">{released ? 'out now' : 'new album'}</span>
+            <span className="hero__kicker">{released ? 'the new album' : 'new album'}</span>
             <span className="mono ash">{RELEASE.dateLabel}</span>
           </div>
           <Countdown now={now} />

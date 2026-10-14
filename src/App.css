@@ -17,3 +17,34 @@
     width: 30px;
   }
 }
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.taps {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.taps__one {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+}

@@ -1,0 +1,69 @@
+.egg {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: var(--paper);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: var(--gutter);
+}
+
+.egg__flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  pointer-events: none;
+}
+
+.egg__close {
+  position: absolute;
+  top: 16px;
+  right: var(--gutter);
+  padding: 8px;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.egg__time {
+  font-size: clamp(80px, 26vw, 180px);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.egg__cover {
+  position: relative;
+  width: min(66vw, 40svh, 360px);
+  transform: rotate(2deg);
+}
+
+.egg__cover img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.egg__heart {
+  position: absolute;
+  width: 18%;
+  top: -10%;
+  right: -8%;
+  transform: rotate(14deg);
+}
+
+.egg__message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: clamp(38px, 10vw, 56px);
+  line-height: 1.05;
+  transform: rotate(-2deg);
+}
+
+.egg__note {
+  color: rgba(10, 10, 10, 0.5);
+}
