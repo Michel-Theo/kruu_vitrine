@@ -45,6 +45,10 @@ Le site est 100 % statique : pas de serveur, pas de Docker, pas de VPS. Le build
 
 Le site est alors accessible sur `https://<nom-du-projet>.pages.dev`.
 
+Projet actuel : **kruu-1134**
+- production (branche `main`) : https://kruu-1134.pages.dev
+- prévisualisation de `develop` : https://develop.kruu-1134.pages.dev (accessible à qui a le lien)
+
 ### Domaine perso (optionnel)
 
 Un domaine s'achète **à l'année** (pas au mois). Le désactiver du renouvellement automatique si le site est jetable.
