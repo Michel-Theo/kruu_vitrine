@@ -64,6 +64,14 @@ export function Hero({ now, entered, released }: { now: Date; entered: boolean; 
       </motion.div>
 
       <div className="hero__text">
+        <motion.span
+          className="label hero__eyebrow"
+          initial={{ opacity: 0 }}
+          animate={entered ? { opacity: 1 } : undefined}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          {released ? 'the new album' : 'new album'}
+        </motion.span>
         <motion.h1
           className="mono offset hero__title"
           style={{ scale: titleScale, y: titleY, opacity: titleOpacity }}
@@ -91,7 +99,8 @@ export function Hero({ now, entered, released }: { now: Date; entered: boolean; 
         >
           <div className="hero__row">
             <span className="hero__kicker">{released ? 'the new album' : 'new album'}</span>
-            <span className="mono ash">{RELEASE.dateLabel}</span>
+            <span className="mono hero__date">{RELEASE.dateLabel}</span>
+            <span className="mono ash hero__by">kruu</span>
           </div>
           <Countdown now={now} released={released} />
         </motion.div>

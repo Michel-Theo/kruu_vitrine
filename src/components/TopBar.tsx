@@ -38,6 +38,12 @@ export function TopBar({ now, visible }: { now: Date; visible: boolean }) {
       <a href="#top" className="topbar__logo">
         kruu
       </a>
+      <nav className="topbar__nav" aria-label="sections">
+        <a href="#album">{RELEASE.title}</a>
+        <a href="#camera-roll">camera roll</a>
+        <a href="#now-playing">now playing</a>
+        <a href="#links">links</a>
+      </nav>
       <div className="topbar__right mono">
         {hasAudio && (
           <button className="topbar__sound" onClick={() => setSound(!sound)} aria-pressed={sound}>
