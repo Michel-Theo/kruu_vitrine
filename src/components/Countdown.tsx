@@ -1,8 +1,8 @@
-import { countdownParts, isReleased, pad } from '../lib/time'
+import { countdownParts, pad } from '../lib/time'
 import './Countdown.css'
 
-export function Countdown({ now }: { now: Date }) {
-  if (isReleased(now)) {
+export function Countdown({ now, released }: { now: Date; released: boolean }) {
+  if (released) {
     return (
       <div className="countdown countdown--out mono blue">
         <span className="dot" aria-hidden />

@@ -7,14 +7,12 @@ import { DrawLayer } from '../components/DrawLayer'
 import { Scribble } from '../components/Scribble'
 import { HANDOFF_EVENT } from '../components/TopBar'
 import { ARROW_DOWN, HEART } from '../lib/scribbles'
-import { isReleased } from '../lib/time'
 import './Hero.css'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-export function Hero({ now, entered }: { now: Date; entered: boolean }) {
+export function Hero({ now, entered, released }: { now: Date; entered: boolean; released: boolean }) {
   const ref = useRef<HTMLElement>(null)
-  const released = isReleased(now)
   const [drew, setDrew] = useState(false)
   const onFirstDraw = useCallback(() => setDrew(true), [])
 
@@ -95,7 +93,7 @@ export function Hero({ now, entered }: { now: Date; entered: boolean }) {
             <span className="hero__kicker">{released ? 'the new album' : 'new album'}</span>
             <span className="mono ash">{RELEASE.dateLabel}</span>
           </div>
-          <Countdown now={now} />
+          <Countdown now={now} released={released} />
         </motion.div>
 
         <div className="hero__cta">
