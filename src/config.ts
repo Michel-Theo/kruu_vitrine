@@ -70,8 +70,9 @@ export const LINKS = [
   { label: 'tiktok', handle: '@kruu575', href: 'https://www.tiktok.com/@kruu575' },
   { label: 'youtube', handle: 'kruu', href: 'https://www.youtube.com/channel/UC9Ze9kfl5XAPp-ukwEB2PPw' },
   { label: 'twitch', handle: 'kruu575', href: 'https://www.twitch.tv/kruu575' },
-  // ⚠️ invitation temporaire, demander un lien permanent
-  { label: 'discord', handle: 'server', href: 'https://discord.gg/nBQPCQsb' },
+  // Discord retiré : l'invitation du Linktree (discord.gg/nBQPCQsb) a expiré.
+  // ⚠️ à remettre avec une invitation permanente (« Never expire ») créée par un admin du serveur :
+  // { label: 'discord', handle: 'server', href: 'https://discord.gg/…' },
   { label: 'spotify', handle: '↗', href: 'https://open.spotify.com/artist/64YoasRU8YcyBAbNRmCEiI' },
   { label: 'apple music', handle: '↗', href: 'https://music.apple.com/us/artist/kruu/1725901483' },
 ]
