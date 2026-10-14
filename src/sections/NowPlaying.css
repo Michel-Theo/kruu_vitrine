@@ -153,7 +153,7 @@
   color: var(--ash);
 }
 
-/* pochettes en noir et blanc dans la rangée (DA), la couleur revient au survol */
+/* pochettes en noir et blanc, comme le reste du site */
 .now__thumb img {
   aspect-ratio: 1;
   width: 100%;

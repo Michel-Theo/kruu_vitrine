@@ -53,14 +53,15 @@ export type AlbumSingle = (typeof ALBUM_SINGLES)[number]
 export const spotifyTrackUrl = (id: string) => `https://open.spotify.com/track/${id}`
 export const YOUTUBE_URL = 'https://www.youtube.com/channel/UC9Ze9kfl5XAPp-ukwEB2PPw'
 
-// ⚠️ placeholders : recadrages des pochettes, à remplacer par les photos de « the archive »
+// Visuels de la galerie « camera roll » : posts Instagram récents qui préparent l'album + les deux pochettes.
+// `ratio` = largeur / hauteur de l'image (la galerie respecte le format de chaque visuel).
 export const ROLL = [
-  { src: '/img/roll-0.webp', stamp: '23:34' },
-  { src: '/img/roll-1.webp', stamp: '02:11' },
-  { src: '/img/roll-5.webp', stamp: "'26 11 06  23:34" },
-  { src: '/img/roll-3.webp', stamp: '04:56' },
-  { src: '/img/roll-4.webp', stamp: '01:17' },
-  { src: '/img/roll-6.webp', stamp: '00:48' },
+  { src: '/img/roll-dont-compare.webp', ratio: 1.484, stamp: '23:34' },
+  { src: '/img/roll-phone.webp', ratio: 1.504, stamp: '02:11' },
+  { src: '/img/cover-false-sense-of-an-ego.webp', ratio: 1, stamp: "'26 10 02  23:34" },
+  { src: '/img/roll-lyrics.webp', ratio: 1.015, stamp: '04:56' },
+  { src: '/img/roll-collage.webp', ratio: 1.017, stamp: '01:17' },
+  { src: '/img/cover-1134.webp', ratio: 1, stamp: "'26 11 06  00:00" },
 ]
 
 export const LINKS = [
