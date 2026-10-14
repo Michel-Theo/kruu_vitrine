@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useReducedMotion } from 'motion/react'
 import { ALBUM_SINGLES, RELEASE, ROLL } from '../config'
 import { hasAudio } from '../lib/audio'
@@ -8,7 +8,6 @@ import { Scribble } from './Scribble'
 import './Loader.css'
 
 const TARGET_MINUTES = 11 * 60 + 34
-const VISITED_KEY = 'kruu:visited'
 const FLASHES = [0.22, 0.48, 0.74]
 const LINE = wavyLine(240)
 
@@ -29,19 +28,11 @@ function preload(onProgress: (p: number) => void) {
   jobs.forEach((j) => j.then(() => onProgress(++done / jobs.length)))
 }
 
-function visitedBefore() {
-  try {
-    const v = localStorage.getItem(VISITED_KEY)
-    localStorage.setItem(VISITED_KEY, '1')
-    return v === '1'
-  } catch {
-    return false
-  }
-}
 
 export function Loader({ onEnter }: { onEnter: (withSound: boolean) => void }) {
   const reduce = useReducedMotion()
-  const minDuration = useMemo(() => (visitedBefore() ? 0.9 : 2.4), [])
+  // durée minimale du loader (rien n'est stocké dans le navigateur du visiteur)
+  const minDuration = 2.2
   const progress = useMotionValue(0)
   const [minutes, setMinutes] = useState(0)
   const [ready, setReady] = useState(false)

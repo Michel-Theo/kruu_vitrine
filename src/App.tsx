@@ -8,9 +8,9 @@ import { TapSplatter } from './components/TapSplatter'
 import { Thread } from './components/Thread'
 import { TopBar } from './components/TopBar'
 import { useNow } from './hooks/useNow'
-import { useRelease } from './hooks/useRelease'
 import { useTabTitle } from './hooks/useTabTitle'
 import { setSound } from './lib/audio'
+import { isReleased } from './lib/time'
 import { Album } from './sections/Album'
 import { CameraRoll } from './sections/CameraRoll'
 import { Footer } from './sections/Footer'
@@ -25,7 +25,6 @@ export function App() {
   const now = useNow()
   const [entered, setEntered] = useState(SKIP_LOADER)
   useTabTitle()
-  const release = useRelease(now)
 
   useEffect(() => {
     document.body.classList.toggle('is-locked', !entered)
@@ -42,14 +41,14 @@ export function App() {
       <AnimatePresence>{!entered && <Loader key="loader" onEnter={enter} />}</AnimatePresence>
       <TopBar now={now} visible={entered} />
       <main>
-        <Hero now={now} entered={entered} released={release.released} />
+        <Hero now={now} entered={entered} released={isReleased(now)} />
         <Thread />
         <CameraRoll />
         <Thread />
         <div className="duo">
           <NowPlaying />
           <Thread className="thread--mobile-only" />
-          <Album now={now} release={release} />
+          <Album now={now} />
         </div>
         <Thread />
       </main>

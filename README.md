@@ -1,6 +1,6 @@
 # kruu — 11:34
 
-Site vitrine immersif pour l'annonce de l'album **11:34** de kruu (sortie le 6 novembre 2026).
+Site de fan **non officiel**, immersif, pour l'annonce de l'album **11:34** de kruu (sortie le 6 novembre 2026). Projet gratuit, non commercial.
 
 Site 100 % statique, sans backend, en React.
 
@@ -27,7 +27,7 @@ npm run lint
 
 Tout ce qui change (dates, liens, contenus) se trouve dans [`src/config.ts`](src/config.ts).
 
-Paramètres utiles en dev : `?skip` saute l'écran de chargement, `?egg` affiche l'easter egg de 11:34, `?released` affiche le site comme après la sortie.
+Paramètres utiles en dev : `?skip` saute l'écran de chargement, `?egg` affiche l'easter egg de 11:34.
 
 ## Déploiement (Cloudflare Pages, gratuit)
 
@@ -52,12 +52,6 @@ Une fois acheté : **projet Pages → Custom domains → Set up a domain**, puis
 
 ## Avant la mise en ligne
 
-Remplacer les placeholders ⚠️ de `src/config.ts` : heure et fuseau de sortie, message de l'easter egg, mentions légales, lien Discord permanent, et les photos de `public/img/roll-*.webp`.
+Remplacer les placeholders ⚠️ de `src/config.ts` : heure et fuseau de sortie, message de l'easter egg, email de contact des mentions légales, lien Discord permanent.
 
-## Bascule automatique à la sortie
-
-Le site passe tout seul en mode « sorti » (pre-save → listen, compte à rebours → out now, tracklist révélée) dès que :
-- la date `RELEASE.date` de `src/config.ts` est passée, **ou**
-- Apple Music rend l'album écoutable.
-
-La tracklist (titres, durées, liens) est lue en direct depuis l'API publique d'Apple (iTunes Lookup, sans clé) grâce à `RELEASE.appleAlbumId`. Rien à redéployer le jour J. Si l'API ne répond pas, le site utilise `RELEASE.tracks` en secours.
+Droits : la musique (`public/audio/`), les pochettes et les visuels appartiennent à kruu / Hallwood Media. Sans leur accord, retirer le MP3 avant la mise en ligne (le site génère alors une ambiance sonore à la place).
