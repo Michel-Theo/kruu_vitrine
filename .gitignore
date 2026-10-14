@@ -8,3 +8,6 @@ Thumbs.db
 .vscode/
 .idea/
 brief_kruu_version_gemini_originale.md
+dist-ssr/
+*.local
+.wrangler/
