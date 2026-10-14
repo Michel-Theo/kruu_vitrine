@@ -115,7 +115,7 @@ export function Hero({ now, entered, released }: { now: Date; entered: boolean; 
             animate={entered ? { opacity: 1 } : undefined}
             transition={{ delay: 1.8 }}
           >
-            spotify · apple music · deezer · +
+            spotify · apple music
           </motion.span>
         </div>
       </div>
