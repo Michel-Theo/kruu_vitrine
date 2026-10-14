@@ -30,6 +30,7 @@
 
 html {
   background: var(--ink);
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -112,6 +113,40 @@ button {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* bouton entouré d'un cercle dessiné à la main */
+.circle-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: 220px;
+  min-height: 80px;
+  padding: 0 34px;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.circle-btn__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.circle-btn:focus-visible {
+  outline: none;
+}
+
+.circle-btn:focus-visible > span {
+  text-decoration: underline wavy var(--blue) 2px;
+  text-underline-offset: 6px;
+}
+
+.circle-btn > span {
+  position: relative;
 }
 
 @media (min-width: 900px) {
