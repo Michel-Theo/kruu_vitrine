@@ -1,5 +1,5 @@
 .now {
-  padding: 96px var(--gutter) 64px;
+  padding: 16px var(--gutter) 64px;
 }
 
 .now__grid {
@@ -182,7 +182,7 @@
 
 @media (min-width: 900px) {
   .now {
-    padding-top: 140px;
+    padding-top: 16px;
   }
 
   .now__grid {

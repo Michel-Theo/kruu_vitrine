@@ -1,6 +1,6 @@
 .footer {
   position: relative;
-  padding: 120px var(--gutter) 0;
+  padding: 16px var(--gutter) 0;
 }
 
 .footer__inner {
