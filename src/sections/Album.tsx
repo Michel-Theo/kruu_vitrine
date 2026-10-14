@@ -7,9 +7,7 @@ import { Scribble } from '../components/Scribble'
 import { SectionHead } from '../components/SectionHead'
 import { Splatter } from '../components/Splatter'
 import { ARROW_CURVE } from '../lib/scribbles'
-import type { ReleaseState } from '../hooks/useRelease'
-import { duration } from '../lib/album'
-import { clockDigits, pad } from '../lib/time'
+import { clockDigits, isReleased, pad } from '../lib/time'
 import './Album.css'
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -64,9 +62,11 @@ function OutRow({ n, name, href }: { n: number; name: string; href: string }) {
   )
 }
 
-export function Album({ now, release }: { now: Date; release: ReleaseState }) {
-  const { released, tracks, trackCount } = release
-  const widths = useMemo(() => Array.from({ length: trackCount }, (_, i) => 110 + ((i * 73) % 130)), [trackCount])
+export function Album({ now }: { now: Date }) {
+  const released = isReleased(now)
+  // après la sortie : titres de RELEASE.tracks (à remplir dans la config), sinon la liste floutée reste
+  const tracks = released ? RELEASE.tracks : null
+  const widths = useMemo(() => Array.from({ length: RELEASE.trackCount }, (_, i) => 110 + ((i * 73) % 130)), [])
 
   return (
     <section className="album" id="album" aria-label={`the album ${RELEASE.title}`}>
@@ -80,27 +80,19 @@ export function Album({ now, release }: { now: Date; release: ReleaseState }) {
 
       <ol className="album__list">
         {tracks
-          ? tracks.map((t, i) => (
+          ? tracks.map((name, i) => (
               <motion.li
-                key={t.n}
+                key={name}
                 className="track"
                 initial={{ opacity: 0, filter: 'blur(6px)' }}
                 whileInView={{ opacity: 1, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
               >
-                {t.url ? (
-                  <a className="track__btn track--revealed" href={t.url} target="_blank" rel="noopener noreferrer">
-                    <span className="mono ash track__n">{pad(t.n)}</span>
-                    <span className="track__name">{t.name}</span>
-                    <span className="mono ash track__time">{duration(t.ms)}</span>
-                  </a>
-                ) : (
-                  <span className="track__btn track--revealed">
-                    <span className="mono ash track__n">{pad(t.n)}</span>
-                    <span className="track__name">{t.name}</span>
-                  </span>
-                )}
+                <span className="track__btn track--revealed">
+                  <span className="mono ash track__n">{pad(i + 1)}</span>
+                  <span className="track__name">{name}</span>
+                </span>
               </motion.li>
             ))
           : widths.map((w, i) => {

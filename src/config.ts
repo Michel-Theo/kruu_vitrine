@@ -4,7 +4,7 @@
 export const RELEASE = {
   title: '11:34',
   // ⚠️ fuseau à confirmer (ici minuit, heure de New York ; Apple indique minuit heure du Pacifique).
-  // Le site bascule aussi tout seul dès qu'Apple rend l'album écoutable (voir appleAlbumId).
+  // À cette date, pre-save devient listen et le compte à rebours devient « out now ».
   date: '2026-11-06T00:00:00-05:00',
   dateLabel: 'nov 6, 2026',
   shortDate: '11/6',
@@ -12,9 +12,7 @@ export const RELEASE = {
   // utilisé après la sortie, à la place du pré-save
   listenUrl: 'https://www.fvr.fan/kruu/1134',
   cover: '/img/cover-1134.webp',
-  // Album sur Apple Music : la tracklist et l'état « écoutable » sont récupérés automatiquement
-  appleAlbumId: '6817764595',
-  // secours si l'API d'Apple ne répond pas : titres affichés après la sortie
+  // titres affichés en clair après la sortie (null = la liste floutée reste)
   tracks: null as string[] | null,
   trackCount: 12,
 }
@@ -90,9 +88,13 @@ export const EASTER_EGG = {
 // Si le fichier est absent, une ambiance générée dans le navigateur prend le relais.
 export const AMBIENT_AUDIO: string | null = '/audio/false-sense-of-an-ego.mp3'
 
-// ⚠️ à compléter avec l'éditeur du site
+// Site de fan non officiel, édité par un particulier à titre non professionnel (gratuit).
+// Droit français (LCEN, art. 6-III-2) : un particulier peut rester anonyme sur le site
+// s'il affiche l'hébergeur et lui a donné son identité (c'est le cas avec le compte Cloudflare).
 export const LEGAL = {
-  publisher: '⚠️ name of the site publisher',
+  // ⚠️ email de contact (demandes de l'artiste, du label, retrait de contenu…)
   contact: '⚠️ contact email',
-  host: 'Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA',
+  // optionnel, pour le portfolio : { name: '…', url: 'https://…' } affiche « site by … » dans le footer
+  credit: null as { name: string; url: string } | null,
+  host: 'Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com',
 }

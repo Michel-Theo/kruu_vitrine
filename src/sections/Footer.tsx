@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { animate, AnimatePresence, motion, useReducedMotion, useScroll, useTransform, useMotionTemplate } from 'motion/react'
-import { LINKS, RELEASE } from '../config'
+import { LEGAL, LINKS, RELEASE } from '../config'
 import { LegalNotice } from '../components/LegalNotice'
 import { Scribble } from '../components/Scribble'
 import { KR } from '../lib/scribbles'
@@ -77,11 +77,19 @@ export function Footer({ now }: { now: Date }) {
         <div className="footer__meta label">
           <span>it's {clock12(now)} where you are</span>
           <span>
-            © 2026 kruu ·{' '}
+            unofficial fan site ·{' '}
             <button className="footer__legal" onClick={() => legal.current?.showModal()}>
               legal notice
             </button>
           </span>
+          {LEGAL.credit && (
+            <span>
+              site by{' '}
+              <a className="footer__legal" href={LEGAL.credit.url} target="_blank" rel="noopener noreferrer">
+                {LEGAL.credit.name}
+              </a>
+            </span>
+          )}
         </div>
       </div>
 
