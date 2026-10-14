@@ -1,6 +1,6 @@
 .roll {
   position: relative;
-  padding: 96px var(--gutter) 64px;
+  padding: 16px var(--gutter) 64px;
 }
 
 .roll__aside {

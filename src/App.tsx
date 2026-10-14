@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, MotionConfig } from 'motion/react'
 import { Cursor } from './components/Cursor'
 import { EasterEgg } from './components/EasterEgg'
@@ -24,7 +24,6 @@ const SKIP_LOADER = new URLSearchParams(window.location.search).has('skip')
 export function App() {
   const now = useNow()
   const [entered, setEntered] = useState(SKIP_LOADER)
-  const chapters = useRef<HTMLDivElement>(null)
   useTabTitle()
   const release = useRelease(now)
 
@@ -44,14 +43,15 @@ export function App() {
       <TopBar now={now} visible={entered} />
       <main>
         <Hero now={now} entered={entered} released={release.released} />
-        <div ref={chapters} className="chapters">
-          <Thread container={chapters} />
-          <CameraRoll />
-          <div className="duo">
-            <NowPlaying />
-            <Album now={now} release={release} />
-          </div>
+        <Thread />
+        <CameraRoll />
+        <Thread />
+        <div className="duo">
+          <NowPlaying />
+          <Thread className="thread--mobile-only" />
+          <Album now={now} release={release} />
         </div>
+        <Thread />
       </main>
       <Footer now={now} />
       <EasterEgg now={now} enabled={entered} />
