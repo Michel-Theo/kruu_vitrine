@@ -130,7 +130,7 @@ function DesktopRoll() {
     <div ref={section} className="roll-desktop">
       <div className="roll-desktop__sticky">
         <div className="roll-desktop__head">
-          <SectionHead label="02 / camera roll" title="the archive" aside={<span className="hand blue roll__aside">(11pm photos)</span>} />
+          <SectionHead label="02 / camera roll" title="the archive" aside={<span className="hand blue roll__aside">(photos)</span>} />
         </div>
         <motion.div ref={track} className="roll-desktop__track" style={{ x }}>
           {ROLL.map((_, i) => (
@@ -161,7 +161,7 @@ export function CameraRoll() {
         <DesktopRoll />
       ) : (
         <>
-          <SectionHead label="02 / camera roll" title="the archive" aside={<span className="hand blue roll__aside">(11pm photos)</span>} />
+          <SectionHead label="02 / camera roll" title="the archive" aside={<span className="hand blue roll__aside">(photos)</span>} />
           <MobileRoll />
         </>
       )}
