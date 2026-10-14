@@ -17,32 +17,41 @@ export const RELEASE = {
   // secours si l'API d'Apple ne répond pas : titres affichés après la sortie
   tracks: null as string[] | null,
   trackCount: 12,
-  // titres de l'album déjà sortis en single : affichés en clair dans la tracklist floutée
-  outNow: [
-    { n: 4, name: 'i was uninspired', href: 'https://music.apple.com/us/album/i-was-uninspired/6817764595?i=6817764599' },
-    { n: 5, name: 'DEMAND', href: 'https://open.spotify.com/track/02jHrxlIWXJKQmPHNfUX8z' },
-    { n: 8, name: 'false sense of an ego', href: 'https://open.spotify.com/track/5oeUQveNCzLPTKgXbVCyf1' },
-  ],
 }
 
-export const SINGLE = {
-  title: 'false sense of an ego',
-  dateLabel: 'oct 2, 2026',
-  cover: '/img/cover-false-sense-of-an-ego.webp',
-  spotifyTrackId: '5oeUQveNCzLPTKgXbVCyf1',
-  links: [
-    { label: 'spotify', href: 'https://open.spotify.com/track/5oeUQveNCzLPTKgXbVCyf1' },
-    { label: 'apple music', href: 'https://music.apple.com/us/artist/kruu/1725901483' },
-    { label: 'youtube', href: 'https://www.youtube.com/channel/UC9Ze9kfl5XAPp-ukwEB2PPw' },
-  ],
-}
-
-export const OTHER_RELEASES = [
-  { title: 'DEMAND', href: 'https://open.spotify.com/track/02jHrxlIWXJKQmPHNfUX8z', image: '/img/roll-2.webp' },
-  { title: 'i was uninspired', href: 'https://open.spotify.com/artist/64YoasRU8YcyBAbNRmCEiI', image: '/img/roll-4.webp' },
-  { title: 'uh oh', href: 'https://open.spotify.com/artist/64YoasRU8YcyBAbNRmCEiI', image: '/img/roll-6.webp' },
-  { title: 'with u', href: 'https://open.spotify.com/artist/64YoasRU8YcyBAbNRmCEiI', image: '/img/roll-0.webp' },
+// Titres de 11:34 déjà sortis en single (du plus récent au plus ancien).
+// Le premier est mis en avant dans « now playing » ; tous apparaissent en clair dans la tracklist.
+export const ALBUM_SINGLES = [
+  {
+    n: 8,
+    title: 'false sense of an ego',
+    dateLabel: 'oct 2, 2026',
+    cover: '/img/cover-false-sense-of-an-ego.webp',
+    spotifyTrackId: '5oeUQveNCzLPTKgXbVCyf1',
+    appleUrl: 'https://music.apple.com/us/album/false-sense-of-an-ego/6813395680?i=6813395682',
+  },
+  {
+    n: 5,
+    title: 'DEMAND',
+    dateLabel: 'aug 14, 2026',
+    cover: '/img/cover-demand.webp',
+    spotifyTrackId: '02jHrxlIWXJKQmPHNfUX8z',
+    appleUrl: 'https://music.apple.com/us/album/demand/6795109140?i=6795109141',
+  },
+  {
+    n: 4,
+    title: 'i was uninspired',
+    dateLabel: 'jun 26, 2026',
+    cover: '/img/cover-i-was-uninspired.webp',
+    spotifyTrackId: '3ZMmnjJpShBR4lsRX6RW9R',
+    appleUrl: 'https://music.apple.com/us/album/i-was-uninspired/6788070074?i=6788070076',
+  },
 ]
+
+export type AlbumSingle = (typeof ALBUM_SINGLES)[number]
+
+export const spotifyTrackUrl = (id: string) => `https://open.spotify.com/track/${id}`
+export const YOUTUBE_URL = 'https://www.youtube.com/channel/UC9Ze9kfl5XAPp-ukwEB2PPw'
 
 // ⚠️ placeholders : recadrages des pochettes, à remplacer par les photos de « the archive »
 export const ROLL = [
