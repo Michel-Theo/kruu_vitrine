@@ -53,15 +53,17 @@ export type AlbumSingle = (typeof ALBUM_SINGLES)[number]
 export const spotifyTrackUrl = (id: string) => `https://open.spotify.com/track/${id}`
 export const YOUTUBE_URL = 'https://www.youtube.com/channel/UC9Ze9kfl5XAPp-ukwEB2PPw'
 
-// Visuels de la galerie « camera roll » : posts Instagram récents qui préparent l'album + les deux pochettes.
-// `ratio` = largeur / hauteur de l'image (la galerie respecte le format de chaque visuel).
+// Visuels de la galerie « camera roll » : les deux pochettes HD, puis les posts Instagram récents.
+// Les cadres sont fixes (format portrait) : `position` choisit la partie de l'image gardée au recadrage.
 export const ROLL = [
-  { src: '/img/roll-dont-compare.webp', ratio: 1.484, stamp: '23:34' },
-  { src: '/img/roll-phone.webp', ratio: 1.504, stamp: '02:11' },
-  { src: '/img/cover-false-sense-of-an-ego.webp', ratio: 1, stamp: "'26 10 02  23:34" },
-  { src: '/img/roll-lyrics.webp', ratio: 1.015, stamp: '04:56' },
-  { src: '/img/roll-collage.webp', ratio: 1.017, stamp: '01:17' },
-  { src: '/img/cover-1134.webp', ratio: 1, stamp: "'26 11 06  00:00" },
+  { src: '/img/cover-1134.webp', position: '50% 50%', stamp: "'26 11 06  00:00" },
+  { src: '/img/cover-false-sense-of-an-ego.webp', position: '40% 50%', stamp: "'26 10 02  23:34" },
+  // le texte « don't compare no one to me » est sur la gauche
+  { src: '/img/roll-dont-compare.webp', position: '14% 50%', stamp: '23:34' },
+  { src: '/img/roll-phone.webp', position: '52% 50%', stamp: '02:11' },
+  { src: '/img/roll-lyrics.webp', position: '50% 50%', stamp: '04:56' },
+  // l'autocollant « don't compare no one to me » est en bas à droite
+  { src: '/img/roll-collage.webp', position: '100% 50%', stamp: '01:17' },
 ]
 
 export const LINKS = [

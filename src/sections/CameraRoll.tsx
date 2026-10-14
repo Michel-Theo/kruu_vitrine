@@ -37,7 +37,6 @@ function Photo({ i, distance, className }: { i: number; distance: MotionValue<nu
   return (
     <motion.figure
       className={`roll-photo ${className ?? ''}`}
-      style={{ aspectRatio: photo.ratio }}
       initial={{ y: -180, rotate: base * 5, scale: 1.1, opacity: 0 }}
       whileInView={{ y: 0, rotate: 0, scale: 1, opacity: 1 }}
       whileTap={{ scale: 0.97 }}
@@ -45,7 +44,13 @@ function Photo({ i, distance, className }: { i: number; distance: MotionValue<nu
       transition={{ duration: 1, ease: EASE, delay: (i % 2) * 0.12 }}
     >
       <motion.div className="roll-photo__inner" style={{ rotate, scale }}>
-        <motion.img src={photo.src} alt="" loading="lazy" style={{ filter, opacity }} draggable={false} />
+        <motion.img
+          src={photo.src}
+          alt=""
+          loading="lazy"
+          style={{ filter, opacity, objectPosition: photo.position }}
+          draggable={false}
+        />
         {focused && (
           <motion.span
             className="roll-photo__flash"
@@ -129,7 +134,7 @@ function DesktopRoll() {
         </div>
         <motion.div ref={track} className="roll-desktop__track" style={{ x }}>
           {ROLL.map((_, i) => (
-            <div key={i} className={`roll-desktop__slot roll-desktop__slot--${i % 3}`} style={{ aspectRatio: ROLL[i].ratio }}>
+            <div key={i} className={`roll-desktop__slot roll-desktop__slot--${i % 3}`}>
               {slots[i] && <DesktopPhoto i={i} x={x} slot={slots[i]} />}
             </div>
           ))}
