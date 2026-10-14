@@ -1,0 +1,111 @@
+.album {
+  position: relative;
+  padding: 16px var(--gutter) 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.album__title {
+  font-size: clamp(96px, 30vw, 200px);
+  font-weight: 200;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .album__title {
+    text-align: left;
+    margin-left: -0.04em;
+  }
+}
+
+.album__list {
+  list-style: none;
+  margin-top: 22px;
+}
+
+.track {
+  border-bottom: 1px solid rgba(242, 242, 242, 0.06);
+}
+
+.track__btn,
+.track--revealed {
+  position: relative;
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.track__n {
+  width: 22px;
+  font-size: 12px;
+}
+
+.track__bar {
+  display: block;
+  height: 11px;
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.track__name {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  transition: text-shadow var(--dur-base) var(--ease-nuit);
+}
+
+a.track__btn:hover .track__name,
+a.track__btn:focus-visible .track__name {
+  text-shadow: 2px 2px 0 var(--blue);
+}
+
+.track__time {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.track__splat {
+  position: absolute;
+  width: 46px;
+  left: 50%;
+  top: -2px;
+  pointer-events: none;
+}
+
+.album__note {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 150px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.album__note .hand {
+  font-size: 30px;
+  transform: rotate(-6deg);
+  white-space: nowrap;
+}
+
+.album__arrow {
+  width: 64px;
+  transform: scaleX(-1) rotate(-30deg);
+}
+
+.album__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+@media (min-width: 900px) {
+  .album {
+    padding-top: 16px;
+  }
+}

@@ -1,0 +1,25 @@
+.countdown {
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(22px, 6.4vw, 44px);
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__unit {
+  font-size: 0.5em;
+}
+
+.countdown--out {
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+}

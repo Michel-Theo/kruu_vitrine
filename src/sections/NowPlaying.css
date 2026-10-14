@@ -1,0 +1,199 @@
+.now {
+  padding: 16px var(--gutter) 64px;
+}
+
+.now__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 20px;
+}
+
+.now__cover-wrap {
+  position: relative;
+  width: min(78vw, 440px);
+  margin: 0 auto;
+}
+
+.now__cover {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.now__splat {
+  position: absolute;
+  pointer-events: none;
+}
+
+.now__splat--a {
+  width: 50%;
+  left: -14%;
+  bottom: -10%;
+}
+
+.now__splat--b {
+  width: 46%;
+  right: -12%;
+  top: -12%;
+}
+
+.now__info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(100%, 440px);
+  margin: 0 auto;
+}
+
+.now__title {
+  font-size: clamp(26px, 7vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.player,
+.player__embed {
+  width: 100%;
+  height: 80px;
+  border: 0;
+  border-radius: 12px;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--night-2);
+  text-align: left;
+  transition: background var(--dur-base) var(--ease-nuit);
+}
+
+.player:hover {
+  background: #242424;
+}
+
+.player__thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.player__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player__title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.player__sub {
+  font-size: 11px;
+}
+
+.player__play {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+}
+
+.now__links {
+  display: flex;
+  gap: 24px;
+  font-size: 15px;
+}
+
+.drawn-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+.drawn-link__line {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: -4px;
+  width: calc(100% + 4px);
+  height: 12px;
+  pointer-events: none;
+}
+
+.now__more {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.now__thumbs {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.now__thumb {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 10px;
+  text-align: left;
+  color: var(--ash);
+}
+
+/* pochettes en noir et blanc, comme le reste du site */
+.now__thumb img {
+  aspect-ratio: 1;
+  width: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: filter var(--dur-base) var(--ease-nuit), opacity var(--dur-base), outline-color var(--dur-base);
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+
+.now__thumb:hover img,
+.now__thumb:focus-visible img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.now__thumb.is-current {
+  color: var(--paper);
+}
+
+.now__thumb.is-current img {
+  opacity: 1;
+  outline-color: var(--blue);
+}
+
+@media (min-width: 900px) {
+  .now {
+    padding-top: 16px;
+  }
+
+  .now__grid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+  }
+
+  .now__cover-wrap,
+  .now__info {
+    margin: 0;
+  }
+}

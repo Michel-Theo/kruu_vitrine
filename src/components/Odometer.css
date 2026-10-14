@@ -1,0 +1,25 @@
+.odometer {
+  display: inline-flex;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  transition: text-shadow var(--dur-base) var(--ease-nuit);
+}
+
+.odometer__window {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odometer__reel {
+  display: flex;
+  flex-direction: column;
+}
+
+.odometer__reel > span,
+.odometer__static {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
