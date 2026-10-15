@@ -77,7 +77,7 @@ export function Footer({ now }: { now: Date }) {
         <div className="footer__meta label">
           <span>it's {clock12(now)} where you are</span>
           <span>
-            unofficial fan site ·{' '}
+            © 2026 kruu ·{' '}
             <button className="footer__legal" onClick={() => legal.current?.showModal()}>
               legal notice
             </button>
