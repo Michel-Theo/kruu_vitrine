@@ -91,6 +91,6 @@ export const LEGAL = {
   publisher: 'kruu',
   contact: { label: 'instagram @kruu575', href: 'https://www.instagram.com/kruu575/' },
   // crédit du site, pour le portfolio : { name: '…', url: 'https://…' } affiche « site by … » dans le footer
-  credit: null as { name: string; url: string } | null,
+  credit: { name: 'Theo Michel', url: 'https://theo-michel.fr' } as { name: string; url: string } | null,
   host: 'Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com',
 }
