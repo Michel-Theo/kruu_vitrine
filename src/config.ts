@@ -1,11 +1,10 @@
 // Tout ce qui change d'une semaine à l'autre est ici : dates, liens, contenus.
-// ⚠️ = à confirmer ou à fournir par l'équipe de l'artiste.
 
 export const RELEASE = {
   title: '11:34',
-  // ⚠️ fuseau à confirmer (ici minuit, heure de New York ; Apple indique minuit heure du Pacifique).
-  // À cette date, pre-save devient listen et le compte à rebours devient « out now ».
-  date: '2026-11-06T00:00:00-05:00',
+  // Sortie à minuit heure locale, comme sur les plateformes : pas de fuseau, la date est lue
+  // dans le fuseau du visiteur. À cette date, pre-save devient listen et le compte à rebours « out now ».
+  date: '2026-11-06T00:00:00',
   dateLabel: 'nov 6, 2026',
   shortDate: '11/6',
   presaveUrl: 'https://hallwood.lnk.to/kruu-1134',
@@ -80,7 +79,6 @@ export const EASTER_EGG = {
   // heure locale du visiteur, format 12 h : 11:34 am et 11:34 pm
   hour12: 11,
   minute: 34,
-  // ⚠️ message à écrire par l'artiste
   message: ["you're still up?", 'me too.'],
 }
 
@@ -88,13 +86,11 @@ export const EASTER_EGG = {
 // Si le fichier est absent, une ambiance générée dans le navigateur prend le relais.
 export const AMBIENT_AUDIO: string | null = '/audio/false-sense-of-an-ego.mp3'
 
-// Site de fan non officiel, édité par un particulier à titre non professionnel (gratuit).
-// Droit français (LCEN, art. 6-III-2) : un particulier peut rester anonyme sur le site
-// s'il affiche l'hébergeur et lui a donné son identité (c'est le cas avec le compte Cloudflare).
+// Site officiel de la sortie, validé par l'artiste : c'est elle qui l'édite.
 export const LEGAL = {
-  // ⚠️ email de contact (demandes de l'artiste, du label, retrait de contenu…)
-  contact: '⚠️ contact email',
-  // optionnel, pour le portfolio : { name: '…', url: 'https://…' } affiche « site by … » dans le footer
+  publisher: 'kruu',
+  contact: { label: 'instagram @kruu575', href: 'https://www.instagram.com/kruu575/' },
+  // crédit du site, pour le portfolio : { name: '…', url: 'https://…' } affiche « site by … » dans le footer
   credit: null as { name: string; url: string } | null,
   host: 'Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com',
 }

@@ -1,4 +1,4 @@
-// Tracés « dessinés à la main » (placeholders ⚠️ : à remplacer par les vrais gribouillis de kruu).
+// Tracés « dessinés à la main » du site.
 // Chaque entrée : viewBox + chemin. Le composant <Scribble> ajoute le double bleu décalé.
 
 export type ScribbleShape = { viewBox: string; d: string; fill?: boolean }

@@ -1,6 +1,6 @@
 # kruu — 11:34
 
-Site de fan **non officiel**, immersif, pour l'annonce de l'album **11:34** de kruu (sortie le 6 novembre 2026). Projet gratuit, non commercial.
+Site officiel et immersif de l'album **11:34** de kruu (sortie le 6 novembre 2026 à minuit, heure locale).
 
 Site 100 % statique, sans backend, en React.
 
@@ -54,8 +54,6 @@ Projet actuel : **kruu-1134**
 Un domaine s'achète **à l'année** (pas au mois). Le désactiver du renouvellement automatique si le site est jetable.
 Une fois acheté : **projet Pages → Custom domains → Set up a domain**, puis mettre à jour `SITE_URL`.
 
-## Avant la mise en ligne
+## Contenus et droits
 
-Remplacer les placeholders ⚠️ de `src/config.ts` : heure et fuseau de sortie, message de l'easter egg, email de contact des mentions légales, lien Discord permanent.
-
-Droits : la musique (`public/audio/`), les pochettes et les visuels appartiennent à kruu / Hallwood Media. Sans leur accord, retirer le MP3 avant la mise en ligne (le site génère alors une ambiance sonore à la place).
+La musique (`public/audio/`), les pochettes et les visuels appartiennent à kruu / Hallwood Media. Leur utilisation sur ce site a été validée par l'artiste.
